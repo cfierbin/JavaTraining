@@ -1,0 +1,10 @@
+package immutableStrings;
+
+public class TestImmutable {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
