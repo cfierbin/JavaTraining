@@ -20,8 +20,6 @@ public class TestImmutable {
 			
 		}
 		*/
-		
-		System.out.println((gfriend1 == gfriend2)?"(gfriend1 == gfriend2) is true":"(gfriend1 == gfriend2) is false");
 
 	}
 	}
