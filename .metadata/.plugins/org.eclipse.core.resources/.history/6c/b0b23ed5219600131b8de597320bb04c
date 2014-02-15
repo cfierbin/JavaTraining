@@ -1,0 +1,24 @@
+package preAndPostOperators;
+
+import java.util.Scanner;
+
+public class TestPreAndPost {
+	
+static Scanner input = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		double number = 0.01;
+		do{
+		//get number from user
+			System.out.println("Enter a number: ");
+			number = input.nextDouble();
+		//print value of i++
+			System.out.println("number++ is: " + number++);
+		//print value of ++i
+		//print value of i
+		}
+		while (true);
+
+	}
+
+}
