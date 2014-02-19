@@ -16,14 +16,14 @@ public class TestEnroll {
 		int courseIndex = 0;
 		
 		for(int i=0; i<users.length; i++){
-			if (userName.equals(users[i].username)) {
+			if (users[i].username == userName) {
 				userIndex = i; //position of user in users array
 				break;
 			}
 		}
 		
 		for(int i=0; i<courses.length; i++){
-			if (courseName.equals(courses[i].name)) {
+			if (courses[i].name == courseName) {
 				courseIndex = i; //position of course in courses array
 				break;
 			}

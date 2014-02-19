@@ -3,7 +3,7 @@ package elearning;
 public class Administrator extends User{
 
 	public Administrator(String string) {
-		username = string;
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
