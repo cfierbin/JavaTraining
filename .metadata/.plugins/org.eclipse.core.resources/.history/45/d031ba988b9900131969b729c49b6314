@@ -1,0 +1,7 @@
+package elearning;
+
+public class Course {
+
+	String name;
+	String shortName;
+}
