@@ -3,13 +3,13 @@ package elearning;
 public class Teacher extends User{
 
 	public Teacher(String string) {
-		username = string;
+		setUsername(string);
 	}
 
 	@Override
 	public void enroll(Course course) {
 		
-		System.out.println("Enrolling teacher "+ username + " to course \"" + course.name +"\"");
+		System.out.println("Enrolling teacher "+ getUsername() + " to course \"" + course.getName() +"\"");
 	}
 
 }

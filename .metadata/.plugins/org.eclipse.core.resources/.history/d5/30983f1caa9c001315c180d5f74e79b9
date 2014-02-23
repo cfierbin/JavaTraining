@@ -1,0 +1,18 @@
+package elearning;
+
+public abstract class User {
+
+	private String username;
+
+	UserRights[] userRights;
+
+	public abstract void enroll(Course course);
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+}

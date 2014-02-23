@@ -12,8 +12,13 @@ public class TestImmutable {
 		
 		System.out.println((gfriend == "Masha")?"(gfriend == \"Masha\") is true":"(gfriend == \"Masha\") is false");
 				
+		/*
 		String gfriend1 = new String ("Natasha");	
 		String gfriend2 = new String ("Natasha");
+		*/
+		
+		String gfriend1 = "Natasha";	
+		String gfriend2 = "Natasha";
 		
 		/*
 		if (gfriend1 == gfriend2){ // true or false?

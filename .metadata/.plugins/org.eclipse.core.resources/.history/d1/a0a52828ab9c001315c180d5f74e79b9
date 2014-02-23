@@ -1,0 +1,37 @@
+package elearning;
+
+public class Course {
+	
+	private String name;
+	private String shortName;
+	private User[] participants;
+
+	public Course(String courseName) {
+		setName(courseName);
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public User[] getParticipants() {
+		return participants;
+	}
+
+	public void setParticipants(User[] participants) {
+		this.participants = participants;
+	}
+
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
+
+}

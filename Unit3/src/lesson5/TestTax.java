@@ -10,7 +10,7 @@ public class TestTax {
 		if (args.length != 3){
 			System.out.println("The program expects 3 arguments in the command line!");
 			System.out.println("Sample usage of the program: " + 
-								"java lesson5/TestTax 50000 NJ 2");
+								"java lesson5.TestTax 50000 NJ 2");
 		}
 		
 		grossIncome = Double.parseDouble(args[0]);

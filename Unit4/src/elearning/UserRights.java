@@ -2,7 +2,7 @@ package elearning;
 
 public class UserRights {
 
-	Course course;
+	User user;
 
 	boolean canView;
 	boolean canEdit;
