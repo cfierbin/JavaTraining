@@ -1,12 +1,11 @@
-
-
 import elearning.Administrator;
 import elearning.Course;
 import elearning.Student;
 import elearning.Teacher;
 import elearning.User;
 
-public class TestEnroll {
+
+public class TestEnroll3 {
 
 	static User[] users = {new Student("Christina"), new Student("Paul"), 
 		new Student("Virginia"), new Teacher("Romeo"), new Administrator("Maria"),
@@ -15,27 +14,14 @@ public class TestEnroll {
 		new Course("Linux Essentials","CE101", 50), new Course("Web Application Development","CE203",100)};
 	
 	public static void main(String[] args) {
-		
-		String userName = args[0];
-		String courseName = args[1];
-		int userIndex = 0; 
-		int courseIndex = 0;
-		
-		for(int i=0; i<users.length; i++){
-			if (userName.equals(users[i].getUsername())) {
-				userIndex = i; //position of user in users array
-				break;
+		for (User u: users){
+			for (Course c: courses){
+				u.enroll(c);
 			}
 		}
-		
-		for(int i=0; i<courses.length; i++){
-			if (courseName.equals(courses[i].getName())) {
-				courseIndex = i; //position of course in courses array
-				break;
-			}
+		for (Course c: courses){
+			c.printParticipants();
 		}
-		
-		users[userIndex].enroll(courses[courseIndex]);
 	}
 
 }

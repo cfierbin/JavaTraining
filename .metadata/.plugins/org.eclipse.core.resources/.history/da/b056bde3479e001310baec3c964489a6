@@ -23,6 +23,10 @@ public class Course {
 			((participants[i].canDelete)?(" canDelete = true"):(" canDelete = false")));
 		}
 	}
+	
+	public Course(String string) {
+		setName(string);
+	}
 
 	public String getName() {
 		return name;

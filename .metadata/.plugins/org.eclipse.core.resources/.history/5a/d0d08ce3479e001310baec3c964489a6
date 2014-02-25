@@ -11,8 +11,8 @@ public class TestEnroll {
 	static User[] users = {new Student("Christina"), new Student("Paul"), 
 		new Student("Virginia"), new Teacher("Romeo"), new Administrator("Maria"),
 		new Student("Juliet")};
-	static Course[] courses = {new Course("Intro to Java", "CS101", 100), new Course("Intro to SQL", "CS102", 100),
-		new Course("Linux Essentials","CE101", 50), new Course("Web Application Development","CE203",100)};
+	static Course[] courses = {new Course("Intro to Java"), new Course("Intro to SQL"),
+		new Course("Linux Essentials"), new Course("Web Application Development")};
 	
 	public static void main(String[] args) {
 		
