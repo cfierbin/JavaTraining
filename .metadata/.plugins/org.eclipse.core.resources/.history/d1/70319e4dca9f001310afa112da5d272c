@@ -13,9 +13,5 @@ public class Administrator extends User{
 		UserRights newParticipant = new UserRights(this, true, true, true);
 		course.getParticipants()[course.getNumberOfParticipants()-1] = newParticipant;
 	}
-	
-	public void createCourse(){
-		System.out.println("ADMIN CREATES A NEW COURSE");
-	}
 
 }

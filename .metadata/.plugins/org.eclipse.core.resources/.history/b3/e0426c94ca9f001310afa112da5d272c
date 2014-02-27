@@ -15,7 +15,7 @@ public class Administrator extends User{
 	}
 	
 	public void createCourse(){
-		System.out.println("ADMIN CREATES A NEW COURSE");
+		System.out.println();
 	}
 
 }
