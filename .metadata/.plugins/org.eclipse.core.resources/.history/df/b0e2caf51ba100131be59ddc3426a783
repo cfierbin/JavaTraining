@@ -1,0 +1,19 @@
+import javax.swing.JPanel;
+
+
+public class Calculator {
+
+	//Declare Calculator's graphical components
+	JPanel windowContent;
+	
+	/**
+	 * Constructor creates the components and adds them to the frame
+	 * @param args
+	 */
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

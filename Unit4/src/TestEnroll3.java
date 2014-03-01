@@ -16,8 +16,9 @@ public class TestEnroll3 {
 	public static void main(String[] args) {
 		for (User u: users){
 			if (u instanceof Administrator){
-				Administrator admin = (Administrator)u;
-				admin.createCourse();
+				//Administrator admin = (Administrator)u;
+				//admin.createCourse();
+				((Administrator)u).createCourse();
 			}
 			for (Course c: courses){
 				u.enroll(c);

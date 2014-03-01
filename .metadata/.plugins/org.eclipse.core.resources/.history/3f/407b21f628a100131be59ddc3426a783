@@ -1,0 +1,141 @@
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+
+public class Calculator {
+
+	//Declare Calculator's graphical components
+	JPanel windowContent;
+	JMenu edit;
+	JMenu view;
+	JMenu help;
+	JTextField displayField;
+	JButton backspace;
+	JButton ce;
+	JButton c;
+	
+	/**
+	 * Constructor creates the components, adds them to the frame and displays the window
+	 * @param args
+	 */
+	
+	public Calculator(){
+		
+		//create the components
+		
+		windowContent = new JPanel();
+		
+		GridBagLayout gb = new GridBagLayout();
+		GridBagConstraints constr = new GridBagConstraints();
+		windowContent.setLayout(gb);
+		
+		displayField = new JTextField();
+		edit = new JMenu("Edit");
+		view = new JMenu("View");
+		help = new JMenu("Help");
+		backspace = new JButton("Backspace");
+		ce = new JButton("CE");
+		c = new JButton("C");
+		
+		//set constraints for the components
+
+//first row (menu)
+		
+		constr.gridx = 0;
+		constr.gridy = 0;
+		constr.gridheight = 1;
+		constr.gridwidth = 1;
+		constr.weightx = 0.0;
+		constr.weighty = 0.0;
+		gb.setConstraints(edit, constr);
+		
+		constr.gridx = 1;
+		constr.gridy = 0;
+		constr.gridheight = 1;
+		constr.gridwidth = 1;
+		constr.weightx = 0.0;
+		constr.weighty = 0.0;
+		gb.setConstraints(view, constr);
+		
+		constr.gridx = 2;
+		constr.gridy = 0;
+		constr.gridheight = 1;
+		constr.gridwidth = 1;
+		constr.weightx = 0.0;
+		constr.weighty = 0.0;
+		gb.setConstraints(help, constr);
+	
+//second row (display field)
+		
+		constr.gridx = 0;
+		constr.gridy = 1;
+		constr.gridheight = 1;
+		constr.gridwidth = 6;
+		constr.fill = GridBagConstraints.BOTH;
+		constr.weightx = 1.0;
+		constr.weighty = 1.0;
+		gb.setConstraints(displayField, constr);
+		
+//first row of buttons (3rd row in grid)
+		
+		constr.gridx = 1;
+		constr.gridy = 2;
+		constr.gridheight = 1;
+		constr.gridwidth = 1;
+		constr.weightx = 1.0;
+		constr.weighty = 1.0;
+		gb.setConstraints(backspace, constr);
+		
+		constr.gridx = 2;
+		constr.gridy = 2;
+		constr.gridheight = 1;
+		constr.gridwidth = 1;
+		constr.weightx = 1.0;
+		constr.weighty = 1.0;
+		gb.setConstraints(ce, constr);
+		
+		constr.gridx = 3;
+		constr.gridy = 2;
+		constr.gridheight = 1;
+		constr.gridwidth = 1;
+		constr.weightx = 1.0;
+		constr.weighty = 1.0;
+		gb.setConstraints(c, constr);
+		
+//second row of buttons (starting with MC)
+		
+		
+		//add the components to the panel
+		
+		windowContent.add(displayField);
+		windowContent.add(edit);
+		windowContent.add(view);
+		windowContent.add(help);
+		windowContent.add(backspace);
+		windowContent.add(ce);
+		windowContent.add(c);
+		
+		//create the frame and set its content pane
+		
+		JFrame frame = new JFrame("Cristina's GridBagLayout Calculator");
+		frame.setContentPane(windowContent);
+		frame.pack(); //set the size big enough to accomodate all controls
+		
+		//display the window
+		
+		frame.setVisible(true);
+		
+	}
+	
+	public static void main(String[] args) {
+		Calculator myCalculator = new Calculator();
+
+	}
+
+}
