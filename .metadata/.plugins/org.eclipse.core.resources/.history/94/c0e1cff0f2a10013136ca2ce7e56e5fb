@@ -63,10 +63,7 @@ public class CalculatorEngine implements ActionListener{
 			if ("+".equals(operator)) {
 				result = Double.parseDouble(parent.getDisplayFieldValue()) + Double.parseDouble(firstNumber);
 			}
-			//store result in firstNumber
-			firstNumber = String.valueOf(result);
-			//display the result
-			parent.setDisplayFieldValue(firstNumber);
+			parent.setDisplayFieldValue(String.valueOf(result));
 			break;
 		case "Backspace":
 			JOptionPane.showMessageDialog(null, "Not yet implemented!", "Not implemented!", JOptionPane.INFORMATION_MESSAGE);
