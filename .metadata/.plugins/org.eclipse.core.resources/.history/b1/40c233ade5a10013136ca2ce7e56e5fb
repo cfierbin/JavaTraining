@@ -117,24 +117,6 @@ public class Calculator {
 		mult.addActionListener(calcEngine);
 		sqrt.addActionListener(calcEngine);
 		mod.addActionListener(calcEngine);
-		one.addActionListener(calcEngine);
-		two.addActionListener(calcEngine);
-		three.addActionListener(calcEngine);
-		four.addActionListener(calcEngine);
-		five.addActionListener(calcEngine);
-		six.addActionListener(calcEngine);
-		seven.addActionListener(calcEngine);
-		eight.addActionListener(calcEngine);
-		nine.addActionListener(calcEngine);
-		zero.addActionListener(calcEngine);
-		mc.addActionListener(calcEngine);
-		mr.addActionListener(calcEngine);
-		ms.addActionListener(calcEngine);
-		mPlus.addActionListener(calcEngine);
-		inv.addActionListener(calcEngine);
-		equal.addActionListener(calcEngine);
-		dot.addActionListener(calcEngine);
-		plusMinus.addActionListener(calcEngine);
 		
 		//set constraints for the components
 

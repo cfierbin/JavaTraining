@@ -1,0 +1,33 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+
+
+public class CalculatorEngine implements ActionListener{
+
+	Calculator parent;
+	
+	CalculatorEngine(Calculator parent){
+		this.parent = parent;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		//get the source of this action
+		JButton clickedButton = (JButton) e.getSource();
+		
+		switch(clickedButton.getText()){
+		case "backspace":
+			break;
+		case "ce":
+			break;
+		case "c":
+			break;
+		default:
+			;	
+		}
+		
+	}
+
+}

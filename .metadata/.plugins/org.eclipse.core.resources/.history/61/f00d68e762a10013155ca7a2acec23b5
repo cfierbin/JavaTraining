@@ -12,39 +12,37 @@ import javax.swing.JTextField;
 public class Calculator {
 
 	//Declare Calculator's graphical components
-	private JFrame frame;
-	private JPanel windowContent;
-	private JMenu edit;
-	private JMenu view;
-	private JMenu help;
-	private JTextField displayField;
-	private JButton backspace;
-	private JButton ce;
-	private JButton c;
-	private JButton one;
-	private JButton two;
-	private JButton three;
-	private JButton four;
-	private JButton five;
-	private JButton six;
-	private JButton seven;
-	private JButton eight;
-	private JButton nine;
-	private JButton zero;
-	private JButton mc, mr, ms, mPlus;
-	private JButton sqrt, mod, inv, equal;
-	private JButton plus, minus, div, mult;
-	private JButton dot, plusMinus;
+	JPanel windowContent;
+	JMenu edit;
+	JMenu view;
+	JMenu help;
+	JTextField displayField;
+	JButton backspace;
+	JButton ce;
+	JButton c;
+	JButton one;
+	JButton two;
+	JButton three;
+	JButton four;
+	JButton five;
+	JButton six;
+	JButton seven;
+	JButton eight;
+	JButton nine;
+	JButton zero;
+	JButton mc, mr, ms, mPlus;
+	JButton sqrt, mod, inv, equal;
+	JButton plus, minus, div, mult;
+	JButton dot, plusMinus;
 	
 	/**
-	 * Constructor creates the components, registers them with listeners, 
-	 * adds them to the frame and displays the window
+	 * Constructor creates the components, adds them to the frame and displays the window
 	 * @param args
 	 */
 	
 	public Calculator(){
 		
-		//create a panel and its layout manager
+		//create the components
 		
 		windowContent = new JPanel();
 		
@@ -55,22 +53,13 @@ public class Calculator {
 		Insets insets3 = new Insets(2,50,2,15);
 		Insets insets4 = new Insets(2,35,2,2);
 		Insets insets5 = new Insets(5,2,2,2);
-		
-		//default constraints' attributes
-		//after using different attributes for a particular component, reset these default constraints
-		
 		constr.insets = insets1; 
 		constr.fill = GridBagConstraints.BOTH;
 		constr.gridheight = 1;
 		constr.gridwidth = 1;
 		constr.weightx = 0.0;
 		constr.weighty = 0.0;
-		
-		//set layout manager for panel
-		
 		windowContent.setLayout(gb);
-		
-		//create the components
 		
 		displayField = new JTextField();
 		edit = new JMenu("Edit");
@@ -103,38 +92,6 @@ public class Calculator {
 		equal = new JButton("=");
 		dot = new JButton(".");
 		plusMinus = new JButton("+/-");
-		
-		//create listener and register components with it		
-		
-		CalculatorEngine calcEngine = new CalculatorEngine(this);
-
-		backspace.addActionListener(calcEngine);
-		ce.addActionListener(calcEngine);
-		c.addActionListener(calcEngine);
-		plus.addActionListener(calcEngine);
-		minus.addActionListener(calcEngine);
-		div.addActionListener(calcEngine);
-		mult.addActionListener(calcEngine);
-		sqrt.addActionListener(calcEngine);
-		mod.addActionListener(calcEngine);
-		one.addActionListener(calcEngine);
-		two.addActionListener(calcEngine);
-		three.addActionListener(calcEngine);
-		four.addActionListener(calcEngine);
-		five.addActionListener(calcEngine);
-		six.addActionListener(calcEngine);
-		seven.addActionListener(calcEngine);
-		eight.addActionListener(calcEngine);
-		nine.addActionListener(calcEngine);
-		zero.addActionListener(calcEngine);
-		mc.addActionListener(calcEngine);
-		mr.addActionListener(calcEngine);
-		ms.addActionListener(calcEngine);
-		mPlus.addActionListener(calcEngine);
-		inv.addActionListener(calcEngine);
-		equal.addActionListener(calcEngine);
-		dot.addActionListener(calcEngine);
-		plusMinus.addActionListener(calcEngine);
 		
 		//set constraints for the components
 
@@ -337,7 +294,7 @@ public class Calculator {
 		
 		//create the frame and set its content pane
 		
-		frame = new JFrame("Cristina's Beautiful Calculator");
+		JFrame frame = new JFrame("Cristina's GridBagLayout Calculator");
 		frame.setContentPane(windowContent);
 		frame.pack(); //set the size big enough to accomodate all controls
 		
@@ -351,16 +308,5 @@ public class Calculator {
 		Calculator myCalculator = new Calculator();
 
 	}
-	
-	//public API
-
-	public String getDisplayFieldValue() {
-		return displayField.getText();
-	}
-
-	public void setDisplayFieldValue(String val) {
-		this.displayField.setText(val);
-	}
-
 
 }

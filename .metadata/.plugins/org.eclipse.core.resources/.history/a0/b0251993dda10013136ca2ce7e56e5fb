@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 public class Calculator {
 
 	//Declare Calculator's graphical components
-	private JFrame frame;
 	private JPanel windowContent;
 	private JMenu edit;
 	private JMenu view;
@@ -37,8 +36,7 @@ public class Calculator {
 	private JButton dot, plusMinus;
 	
 	/**
-	 * Constructor creates the components, registers them with listeners, 
-	 * adds them to the frame and displays the window
+	 * Constructor creates the components, adds them to the frame and displays the window
 	 * @param args
 	 */
 	
@@ -103,38 +101,6 @@ public class Calculator {
 		equal = new JButton("=");
 		dot = new JButton(".");
 		plusMinus = new JButton("+/-");
-		
-		//create listener and register components with it		
-		
-		CalculatorEngine calcEngine = new CalculatorEngine(this);
-
-		backspace.addActionListener(calcEngine);
-		ce.addActionListener(calcEngine);
-		c.addActionListener(calcEngine);
-		plus.addActionListener(calcEngine);
-		minus.addActionListener(calcEngine);
-		div.addActionListener(calcEngine);
-		mult.addActionListener(calcEngine);
-		sqrt.addActionListener(calcEngine);
-		mod.addActionListener(calcEngine);
-		one.addActionListener(calcEngine);
-		two.addActionListener(calcEngine);
-		three.addActionListener(calcEngine);
-		four.addActionListener(calcEngine);
-		five.addActionListener(calcEngine);
-		six.addActionListener(calcEngine);
-		seven.addActionListener(calcEngine);
-		eight.addActionListener(calcEngine);
-		nine.addActionListener(calcEngine);
-		zero.addActionListener(calcEngine);
-		mc.addActionListener(calcEngine);
-		mr.addActionListener(calcEngine);
-		ms.addActionListener(calcEngine);
-		mPlus.addActionListener(calcEngine);
-		inv.addActionListener(calcEngine);
-		equal.addActionListener(calcEngine);
-		dot.addActionListener(calcEngine);
-		plusMinus.addActionListener(calcEngine);
 		
 		//set constraints for the components
 
@@ -337,7 +303,7 @@ public class Calculator {
 		
 		//create the frame and set its content pane
 		
-		frame = new JFrame("Cristina's Beautiful Calculator");
+		JFrame frame = new JFrame("Cristina's GridBagLayout Calculator");
 		frame.setContentPane(windowContent);
 		frame.pack(); //set the size big enough to accomodate all controls
 		
@@ -361,6 +327,5 @@ public class Calculator {
 	public void setDisplayFieldValue(String val) {
 		this.displayField.setText(val);
 	}
-
 
 }

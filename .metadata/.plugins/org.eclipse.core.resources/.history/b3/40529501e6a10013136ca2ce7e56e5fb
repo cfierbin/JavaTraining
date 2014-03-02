@@ -127,14 +127,6 @@ public class Calculator {
 		eight.addActionListener(calcEngine);
 		nine.addActionListener(calcEngine);
 		zero.addActionListener(calcEngine);
-		mc.addActionListener(calcEngine);
-		mr.addActionListener(calcEngine);
-		ms.addActionListener(calcEngine);
-		mPlus.addActionListener(calcEngine);
-		inv.addActionListener(calcEngine);
-		equal.addActionListener(calcEngine);
-		dot.addActionListener(calcEngine);
-		plusMinus.addActionListener(calcEngine);
 		
 		//set constraints for the components
 
