@@ -76,7 +76,7 @@ public class CalculatorEngine implements ActionListener{
 				}
 			}
 			catch(Exception exception){
-					JOptionPane.showMessageDialog(null, "An exception occured!", "Exception", JOptionPane.ERROR_MESSAGE);	
+					JOptionPane.showMessageDialog(null, "An arithmetic exception occured!", "Exception", JOptionPane.ERROR_MESSAGE);	
 				}			
 			//store result in firstNumber
 			firstNumber = String.valueOf(result);

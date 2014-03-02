@@ -59,25 +59,24 @@ public class CalculatorEngine implements ActionListener{
 			//print info on system console
 			System.out.println("The second number is: " + parent.getDisplayFieldValue());
 			System.out.println("The operation required is " + operator);
-			
 			//perform the selected action
-			try {	
-				if ("+".equals(operator)) {
-					result = Double.parseDouble(parent.getDisplayFieldValue()) + Double.parseDouble(firstNumber);
+			if ("+".equals(operator)) {
+				result = Double.parseDouble(parent.getDisplayFieldValue()) + Double.parseDouble(firstNumber);
+			}
+			if ("-".equals(operator)) {
+				result =  Double.parseDouble(firstNumber) - Double.parseDouble(parent.getDisplayFieldValue());
+			}
+			if ("*".equals(operator)) {
+				result =  Double.parseDouble(firstNumber) * Double.parseDouble(parent.getDisplayFieldValue());
+			}
+			if ("/".equals(operator)) {
+				try{
+				result =  Double.parseDouble(firstNumber) / Double.parseDouble(parent.getDisplayFieldValue());
 				}
-				if ("-".equals(operator)) {
-					result =  Double.parseDouble(firstNumber) - Double.parseDouble(parent.getDisplayFieldValue());
-				}
-				if ("*".equals(operator)) {
-					result =  Double.parseDouble(firstNumber) * Double.parseDouble(parent.getDisplayFieldValue());
-				}
-				if ("/".equals(operator)) {
-					result =  Double.parseDouble(firstNumber) / Double.parseDouble(parent.getDisplayFieldValue());
+				catch(Exception exception){
+					JOptionPane.showMessageDialog(null, "An arithmetic exception occured!", "Exception", JOptionPane.ERROR_MESSAGE);	
 				}
 			}
-			catch(Exception exception){
-					JOptionPane.showMessageDialog(null, "An exception occured!", "Exception", JOptionPane.ERROR_MESSAGE);	
-				}			
 			//store result in firstNumber
 			firstNumber = String.valueOf(result);
 			//display the result
