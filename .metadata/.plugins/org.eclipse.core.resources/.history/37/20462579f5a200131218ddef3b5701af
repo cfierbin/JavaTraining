@@ -151,7 +151,6 @@ public class Calculator {
 		
 		frame = new JFrame("Cristina's Beautiful Calculator");
 		frame.setContentPane(windowContent);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
 	

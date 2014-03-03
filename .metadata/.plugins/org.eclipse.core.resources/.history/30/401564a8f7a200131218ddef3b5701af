@@ -7,8 +7,6 @@ public class BoxLayoutCalculator extends Calculator{
 	
 	final static int initialFrameSizeX = 250;
 	final static int inistialFrameSizeY = 310;
-	final static int displayFieldPreferredX = 200;
-	final static int displayFieldPreferredY = 20;
 	
 	public BoxLayoutCalculator(){
 			
@@ -20,7 +18,7 @@ public class BoxLayoutCalculator extends Calculator{
 			//set layout manager for panel
 			BoxLayout boxLayout = new BoxLayout(windowContent, BoxLayout.Y_AXIS);
 			
-			displayField.setPreferredSize(new Dimension(displayFieldPreferredX,displayFieldPreferredY));
+			displayField.setPreferredSize(new Dimension(200,20));
 			
 			//set the size of the frame big enough to accomodate all controls
 			frame.pack(); 
