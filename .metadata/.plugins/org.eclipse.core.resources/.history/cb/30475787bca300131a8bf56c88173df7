@@ -193,9 +193,7 @@ public class GridBagLayoutCalculator extends Calculator{
 		
 		constr.gridx = 4;
 		constr.gridy = 6;
-		constr.ipadx = 10;
 		gb.setConstraints(plus, constr);
-		constr.ipadx = 0;
 		
 		constr.gridx = 5;
 		constr.gridy = 6;

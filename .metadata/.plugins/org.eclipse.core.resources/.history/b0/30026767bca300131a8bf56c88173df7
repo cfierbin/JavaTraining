@@ -17,7 +17,7 @@ public class GridBagLayoutCalculator extends Calculator{
 		GridBagConstraints constr = new GridBagConstraints();
 		Insets insets1 = new Insets(2,2,2,2); //minimum amount of space between the component and the edges of its display area (up,left,down,right)
 		Insets insets2 = new Insets(2,2,2,15); //bigger space after the right edge
-		Insets insets3 = new Insets(2,50,2,20);
+		Insets insets3 = new Insets(2,50,2,15);
 		Insets insets4 = new Insets(2,35,2,2);
 		Insets insets5 = new Insets(5,2,2,2);
 		
@@ -28,8 +28,8 @@ public class GridBagLayoutCalculator extends Calculator{
 		constr.fill = GridBagConstraints.BOTH;
 		constr.gridheight = 1;
 		constr.gridwidth = 1;
-		constr.weightx = 1.0;
-		constr.weighty = 1.0;
+		constr.weightx = 0.0;
+		constr.weighty = 0.0;
 		
 		//set layout manager for panel
 		windowContent.setLayout(gb);
@@ -76,7 +76,7 @@ public class GridBagLayoutCalculator extends Calculator{
 		constr.gridx = 4;
 		constr.gridy = 2;
 		constr.gridwidth = 2;
-		constr.insets = new Insets(2,40,2,2);
+		constr.insets = insets4;
 		gb.setConstraints(c, constr);
 		constr.gridwidth = 1;
 		constr.insets = insets1;
@@ -187,15 +187,11 @@ public class GridBagLayoutCalculator extends Calculator{
 		
 		constr.gridx = 3;
 		constr.gridy = 6;
-		constr.ipadx = 15;
 		gb.setConstraints(dot, constr);
-		constr.ipadx = 0;
 		
 		constr.gridx = 4;
 		constr.gridy = 6;
-		constr.ipadx = 10;
 		gb.setConstraints(plus, constr);
-		constr.ipadx = 0;
 		
 		constr.gridx = 5;
 		constr.gridy = 6;

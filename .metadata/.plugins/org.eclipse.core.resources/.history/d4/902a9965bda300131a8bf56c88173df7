@@ -49,7 +49,6 @@ public class Calculator {
 		//create the components
 		
 		displayField = new JTextField();
-		displayField.setHorizontalAlignment(JTextField.RIGHT);
 		edit = new JMenu("Edit");
 		view = new JMenu("View");
 		help = new JMenu("Help");

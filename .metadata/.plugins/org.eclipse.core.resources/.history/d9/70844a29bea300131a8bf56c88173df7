@@ -25,7 +25,7 @@ public class GridBagLayoutCalculator extends Calculator{
 		//after using different attributes for a particular component, reset these default constraints
 		
 		constr.insets = insets1; 
-		constr.fill = GridBagConstraints.BOTH;
+		constr.fill = GridBagConstraints.VERTICAL;
 		constr.gridheight = 1;
 		constr.gridwidth = 1;
 		constr.weightx = 1.0;
