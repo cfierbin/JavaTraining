@@ -109,8 +109,18 @@ public class TicTacToeApplet extends JApplet implements MouseListener
                 }
                 while(arrayOfButtons[computerMove].getText()!="");
                 arrayOfButtons[computerMove].setText("O");
-                checkForWinner();            
+                checkForWinner();
+                
+            //} 
+           /* 
+            else if (playerName == PLAYERO){
+                currentButton.setText("O");
+                setPlayerName(PLAYERX);
+            }
+            */
+            
         }
+        //checkForWinner();
     }
 
 	public void mousePressed(MouseEvent e) {

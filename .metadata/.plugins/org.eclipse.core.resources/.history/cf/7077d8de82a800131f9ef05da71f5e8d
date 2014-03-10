@@ -67,7 +67,7 @@ public class TicTacToeApplet extends JApplet implements MouseListener
 	
     private void setPlayerName(String playerName){
         this.playerName = playerName;
-  //      playerNumber.setText(playerName  + " your turn. ");
+        playerNumber.setText(playerName  + " your turn. ");
     }
 	
     private void reset(){
@@ -76,7 +76,6 @@ public class TicTacToeApplet extends JApplet implements MouseListener
         	button.setForeground(Color.black);
         }
         setPlayerName(PLAYERX);
-        playerNumber.setText("");
     }
 	
    public void checkForWinner(){
@@ -95,7 +94,7 @@ public class TicTacToeApplet extends JApplet implements MouseListener
         javax.swing.JButton currentButton = (JButton)e.getComponent();
         if (currentButton.getText() == ""){
            // if (playerName == PLAYERX) {
-        		setPlayerName(PLAYERX);
+        	setPlayerName(PLAYERX);
                 currentButton.setText("X");
                 checkForWinner();
                 setPlayerName(PLAYERO);
@@ -109,8 +108,18 @@ public class TicTacToeApplet extends JApplet implements MouseListener
                 }
                 while(arrayOfButtons[computerMove].getText()!="");
                 arrayOfButtons[computerMove].setText("O");
-                checkForWinner();            
+                //checkForWinner();
+                
+            //} 
+           /* 
+            else if (playerName == PLAYERO){
+                currentButton.setText("O");
+                setPlayerName(PLAYERX);
+            }
+            */
+            
         }
+        checkForWinner();
     }
 
 	public void mousePressed(MouseEvent e) {

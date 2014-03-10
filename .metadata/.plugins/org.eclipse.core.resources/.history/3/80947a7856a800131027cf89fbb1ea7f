@@ -1,6 +1,5 @@
 package com.practicaljava.lesson11;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,7 +14,6 @@ public class TicTacToeApplet extends JApplet implements MouseListener
     private static final String PLAYERX = "Player X";
     private static final String PLAYERO = "Player O";
     private static final int BUTTON_FONT_SIZE = 40;
-    private static final Color WIN_HIGHLIGHT_COLOR = Color.magenta;
 	
     private String playerName = PLAYERX;
     
@@ -41,13 +39,9 @@ public class TicTacToeApplet extends JApplet implements MouseListener
         basePanel.setLayout(new javax.swing.BoxLayout(basePanel, javax.swing.BoxLayout.Y_AXIS));
         playerNumber = new javax.swing.JLabel(playerName, SwingConstants.CENTER);
         playAgain = new javax.swing.JButton("Play Again");
-        playAgain.addMouseListener(new MouseAdapter(){
-        								public void mouseClicked(MouseEvent e)
-        									{
-        										reset();
-        									}	
-        								}
-        						  );
+        playAgain.addMouseListener(new MouseAdapter(){public void mouseClicked(MouseEvent e)
+        			{reset();
+        				}});
         Font buttonFont = new Font("Times New Roman", Font.PLAIN, BUTTON_FONT_SIZE);
         for (int i=0; i<9; i++){
         	arrayOfButtons[i] = new javax.swing.JButton();
@@ -67,23 +61,18 @@ public class TicTacToeApplet extends JApplet implements MouseListener
 	
     private void setPlayerName(String playerName){
         this.playerName = playerName;
-  //      playerNumber.setText(playerName  + " your turn. ");
+        playerNumber.setText(playerName  + " your turn. ");
     }
 	
     private void reset(){
         for(javax.swing.JButton button: arrayOfButtons){
         	button.setText("");
-        	button.setForeground(Color.black);
         }
         setPlayerName(PLAYERX);
-        playerNumber.setText("");
     }
 	
    public void checkForWinner(){
         if(findThreeInARow()){
-        	//highlight winning combination
-        	highlightWinningCombination();
-        	//determine and display the name of the winner
             String winnerName=(playerName == PLAYERX)?PLAYERO:PLAYERX;
             playerNumber.setText(winnerName.concat(" won!!! Congratulations!!!"));
         }    
@@ -94,23 +83,21 @@ public class TicTacToeApplet extends JApplet implements MouseListener
     public void mouseClicked(MouseEvent e) {
         javax.swing.JButton currentButton = (JButton)e.getComponent();
         if (currentButton.getText() == ""){
-           // if (playerName == PLAYERX) {
-        		setPlayerName(PLAYERX);
+            if (playerName == PLAYERX) {
                 currentButton.setText("X");
-                checkForWinner();
                 setPlayerName(PLAYERO);
                 //generate random move by computer using java.util.Random.nextInt()
                 //if the randomly generated square is occupied, call the method again
                 //make moves smarter by using minimax strategy
-                java.util.Random randomInstance = new java.util.Random();
-                int computerMove;
-                do {
-                	computerMove = randomInstance.nextInt(9);
-                }
-                while(arrayOfButtons[computerMove].getText()!="");
-                arrayOfButtons[computerMove].setText("O");
-                checkForWinner();            
+            } 
+            /*
+            else if (playerName == PLAYERO){
+                currentButton.setText("O");
+                setPlayerName(PLAYERX);
+            }
+            */
         }
+        checkForWinner();
     }
 
 	public void mousePressed(MouseEvent e) {
@@ -139,38 +126,4 @@ public class TicTacToeApplet extends JApplet implements MouseListener
 	    else
 	        return false;
     }
-	
-	private void highlightWinningCombination(){
-	    if (arrayOfButtons[0].getText() == arrayOfButtons[1].getText() && arrayOfButtons[1].getText() == arrayOfButtons[2].getText() && arrayOfButtons[0].getText() != ""){
-	    	changeColor(arrayOfButtons[0],arrayOfButtons[1],arrayOfButtons[2],WIN_HIGHLIGHT_COLOR);
-	    }
-		if    	(arrayOfButtons[3].getText() == arrayOfButtons[4].getText() && arrayOfButtons[4].getText() == arrayOfButtons[5].getText() && arrayOfButtons[3].getText() != ""){
-			changeColor(arrayOfButtons[3],arrayOfButtons[4],arrayOfButtons[5],WIN_HIGHLIGHT_COLOR);		
-		    	}
-		if        (arrayOfButtons[6].getText() == arrayOfButtons[7].getText() && arrayOfButtons[7].getText() == arrayOfButtons[8].getText() && arrayOfButtons[6].getText() != ""){
-			changeColor(arrayOfButtons[6],arrayOfButtons[7],arrayOfButtons[8],WIN_HIGHLIGHT_COLOR);   	
-		        }
-		if        (arrayOfButtons[0].getText() == arrayOfButtons[3].getText() && arrayOfButtons[3].getText() == arrayOfButtons[6].getText() && arrayOfButtons[0].getText() != ""){
-			changeColor(arrayOfButtons[0],arrayOfButtons[3],arrayOfButtons[6],WIN_HIGHLIGHT_COLOR);    	
-		        }
-	    if        (arrayOfButtons[1].getText() == arrayOfButtons[4].getText() && arrayOfButtons[4].getText() == arrayOfButtons[7].getText() && arrayOfButtons[1].getText() != ""){
-	    	changeColor(arrayOfButtons[1],arrayOfButtons[4],arrayOfButtons[7],WIN_HIGHLIGHT_COLOR);    	
-	            }
-	    if        (arrayOfButtons[2].getText() == arrayOfButtons[5].getText() && arrayOfButtons[5].getText() == arrayOfButtons[8].getText() && arrayOfButtons[2].getText() != ""){
-	    	changeColor(arrayOfButtons[2],arrayOfButtons[5],arrayOfButtons[8],WIN_HIGHLIGHT_COLOR);    	
-	            }
-	    if       (arrayOfButtons[0].getText() == arrayOfButtons[4].getText() && arrayOfButtons[4].getText() == arrayOfButtons[8].getText() && arrayOfButtons[0].getText() != ""){
-	    	changeColor(arrayOfButtons[0],arrayOfButtons[4],arrayOfButtons[8],WIN_HIGHLIGHT_COLOR);    	
-	            }
-	    if        (arrayOfButtons[2].getText() == arrayOfButtons[4].getText() && arrayOfButtons[4].getText() == arrayOfButtons[6].getText() && arrayOfButtons[2].getText() != ""){
-	    	changeColor(arrayOfButtons[2],arrayOfButtons[4],arrayOfButtons[6],WIN_HIGHLIGHT_COLOR);    	
-	            }
-	        
-	}
-	
-	private void changeColor(JButton jb1, JButton jb2, JButton jb3, Color color){
-		jb1.setForeground(color);
-		jb2.setForeground(color);
-		jb3.setForeground(color);
-	}
 }
