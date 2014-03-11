@@ -1,6 +1,7 @@
 package com.practicaljava.lesson11;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -10,35 +11,62 @@ import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
+
 public class TicTacToeApplet extends JApplet implements MouseListener
 {
     private static final String PLAYERX = "Player X";
     private static final String PLAYERO = "Player O";
+    
+    //GUI settings
     private static final int BUTTON_FONT_SIZE = 40;
+    private static final int BUTTON_Preferred_SIZE_X = 100;
+    private static final int BUTTON_Preferred_SIZE_Y = 100;
     private static final Color WIN_HIGHLIGHT_COLOR = Color.magenta;
-	
-    private String playerName = PLAYERX;
+    private static final String FONT_TYPE = "Times New Roman";
     
-    private javax.swing.JButton[] arrayOfButtons = new javax.swing.JButton[9];
+    private Font buttonFont = new Font(FONT_TYPE, Font.PLAIN, BUTTON_FONT_SIZE);
     
+    //Random object used to generate computer moves; could it be "static"?
+    private final java.util.Random randomInstance = new java.util.Random();
+	   
+    //GUI components
+    
+    private javax.swing.JButton[] arrayOfButtons = new javax.swing.JButton[9];   
     private javax.swing.JButton playAgain;
-	
     private javax.swing.JLabel playerNumber;
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JPanel basePanel;
+    
+    //current player
+    private String playerName = PLAYERX;
+    
+    //implementing observer design pattern
+    private List<PropertyChangeListener> listener = new ArrayList<PropertyChangeListener>();
 
+    //applet callback; called only once when the applet is loaded by the browser's Java Plug-in
     public void init(){
         initComponents();
+        //create observer to be notified about computer moves
+        MyObserver observer = new MyObserver(this);
     }
 
-    private void initComponents(){
+    //initialize components
+    private void initComponents(){	
+    	//buttonsPanel with GridLayout
         buttonsPanel = new javax.swing.JPanel();
         buttonsPanel.setLayout(new java.awt.GridLayout(3, 3));
+        //bottomPanel with FlowLayout for displaying text and restarting game
         bottomPanel = new javax.swing.JPanel();
         bottomPanel.setLayout(new java.awt.FlowLayout());
+        //basePanel with BoxLayout, holding buttonsPanel and bottomPanel
         basePanel = new javax.swing.JPanel();
         basePanel.setLayout(new javax.swing.BoxLayout(basePanel, javax.swing.BoxLayout.Y_AXIS));
+        
         playerNumber = new javax.swing.JLabel(playerName, SwingConstants.CENTER);
         playAgain = new javax.swing.JButton("Play Again");
         playAgain.addMouseListener(new MouseAdapter(){
@@ -48,16 +76,21 @@ public class TicTacToeApplet extends JApplet implements MouseListener
         									}	
         								}
         						  );
-        Font buttonFont = new Font("Times New Roman", Font.PLAIN, BUTTON_FONT_SIZE);
+
         for (int i=0; i<9; i++){
         	arrayOfButtons[i] = new javax.swing.JButton();
         }
         for(javax.swing.JButton button: arrayOfButtons){
         	button.addMouseListener(this);
         	button.setFont(buttonFont);
+        	button.setPreferredSize(new Dimension(BUTTON_Preferred_SIZE_X, BUTTON_Preferred_SIZE_Y));
         	buttonsPanel.add(button);
-        }       
+        }
+        
+        //game started by Player X (human)
         setPlayerName(PLAYERX); 
+        
+        //add components to their containers
         bottomPanel.add(playerNumber);
         bottomPanel.add(playAgain);
         basePanel.add(buttonsPanel);
@@ -67,9 +100,10 @@ public class TicTacToeApplet extends JApplet implements MouseListener
 	
     private void setPlayerName(String playerName){
         this.playerName = playerName;
-  //      playerNumber.setText(playerName  + " your turn. ");
+  // for game with 2 human players:     playerNumber.setText(playerName  + " your turn. ");
     }
 	
+    //called when the button playAgain is pressed
     private void reset(){
         for(javax.swing.JButton button: arrayOfButtons){
         	button.setText("");
@@ -79,37 +113,68 @@ public class TicTacToeApplet extends JApplet implements MouseListener
         playerNumber.setText("");
     }
 	
-   public void checkForWinner(){
+   
+    private boolean checkForWinner(){
+    //returns true if there is a winner	   
         if(findThreeInARow()){
         	//highlight winning combination
         	highlightWinningCombination();
         	//determine and display the name of the winner
-            String winnerName=(playerName == PLAYERX)?PLAYERO:PLAYERX;
-            playerNumber.setText(winnerName.concat(" won!!! Congratulations!!!"));
-        }    
-        
+            playerNumber.setText(playerName.concat(" won!!! Congratulations!!!"));
+            return true;
+        }
+        else {
+            return false;  
+        }           
     }
+   
+   private boolean lastEmptyCell(){
+   //returns true if all the cells are occupied
+	   for(JButton button:arrayOfButtons){
+		   if ("".equals(button.getText()))
+		   return false;
+	   }
+	   return true;
+   }
+   
+   private int getComputerMove(){
+	   int computerMove;
+	 //generate random move by computer until it finds an empty cell   
+	do {
+   		computerMove = randomInstance.nextInt(9);
+   		}
+   	while(arrayOfButtons[computerMove].getText()!="");
+	   
+	return computerMove;
+   }
     
 	
     public void mouseClicked(MouseEvent e) {
+    	setPlayerName(PLAYERX);
         javax.swing.JButton currentButton = (JButton)e.getComponent();
-        if (currentButton.getText() == ""){
-           // if (playerName == PLAYERX) {
-        		setPlayerName(PLAYERX);
-                currentButton.setText("X");
-                checkForWinner();
-                setPlayerName(PLAYERO);
-                //generate random move by computer using java.util.Random.nextInt()
-                //if the randomly generated square is occupied, call the method again
-                //make moves smarter by using minimax strategy
-                java.util.Random randomInstance = new java.util.Random();
-                int computerMove;
-                do {
-                	computerMove = randomInstance.nextInt(9);
+        //if the user clicks an empty cell and the computer hasn't already won, mark that cell with X
+        if ((currentButton.getText() == "")&&(!checkForWinner())){
+                //display player X move in applet
+        		currentButton.setText("X");
+        		//communicate player X move (integer) to listeners
+                //notifyListeners(this, currentButton.getText(), "", "X");
+                //if the current move is not winning and there still are empty cells, let the computer play its turn
+                //checkForWinner() must be evaluated, because the method highlights the winning combination, use & operator 
+                if ((!lastEmptyCell())&(!checkForWinner())){
+                	setPlayerName(PLAYERO);
+                	
+                	//generate random move by computer using java.util.Random.nextInt()
+                	//if the randomly generated square is occupied, call the method again
+                	//make moves smarter by using minimax strategy
+
+                	int computerMove = getComputerMove();
+                	
+                	//display computer move in applet
+                	arrayOfButtons[computerMove].setText("O");
+                	//communicate computer move (integer) to listeners
+                	notifyListeners(this, arrayOfButtons[computerMove].getText(), null, String.valueOf(computerMove));
                 }
-                while(arrayOfButtons[computerMove].getText()!="");
-                arrayOfButtons[computerMove].setText("O");
-                checkForWinner();            
+                	checkForWinner();            
         }
     }
 
@@ -173,4 +238,28 @@ public class TicTacToeApplet extends JApplet implements MouseListener
 		jb2.setForeground(color);
 		jb3.setForeground(color);
 	}
+
+    //implementing observer design pattern
+	
+	  protected void addChangeListener(PropertyChangeListener newListener) {
+		    listener.add(newListener);
+		  }
+	  protected void notifyListeners(Object object, String property, String oldValue, String newValue) {
+		    for (PropertyChangeListener name : listener) {
+		      name.propertyChange(new PropertyChangeEvent(this, property, oldValue, newValue));
+		    }
+		  }
 }
+
+class MyObserver implements PropertyChangeListener {
+    
+    public MyObserver(TicTacToeApplet model) {
+        model.addChangeListener(this);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent event) {
+    	//new value = position of move (integer)
+       System.out.println("Changed property: " + event.getPropertyName() + " | [new -> " + event.getNewValue() +"]");
+    }
+} 
