@@ -79,6 +79,7 @@ public class TicTacToeApplet extends JApplet implements MouseListener
 
         for (int i=0; i<9; i++){
         	arrayOfButtons[i] = new javax.swing.JButton();
+        	arrayOfButtons[i].setName("button"+i);
         }
         for(javax.swing.JButton button: arrayOfButtons){
         	button.addMouseListener(this);
@@ -111,6 +112,10 @@ public class TicTacToeApplet extends JApplet implements MouseListener
         }
         setPlayerName(PLAYERX);
         playerNumber.setText("");
+    }
+    
+    private int getIndex(JButton button){
+    	return Character.getNumericValue(button.getName().charAt(6));
     }
 	
    
@@ -147,6 +152,120 @@ public class TicTacToeApplet extends JApplet implements MouseListener
 	   
 	return computerMove;
    }
+   
+   private int minimaxComputerMove(){
+	   //http://www.youtube.com/watch?v=3sbGRBjsf0o
+	   int computerMove = 0;
+	 //o = number of rows, columns or diagonals with two O's and no X
+	 //x = number of rows, columns or diagonals with one O and no X
+	 //z = number of rows, columns or diagonals with two X's and no O
+	 //y = number of rows, columns or diagonals with one X and no O
+	 //evaluationFunction = 3*o + x - (3*z + y)
+	   
+	   //calculate evaluation function for each possible move of O
+	   //pick move with maximum value of the evaluation function
+	   
+	   
+	   return computerMove;
+   }
+   
+   private int minimaxEvaluationFunction(int[] arrayX, int[] arrayO){
+	   //number of rows, columns or diagonals with two O's and no X
+	   int o = calcO(arrayX, arrayO);
+	   //number of rows, columns or diagonals with one O and no X
+	   int x = calcX(arrayX, arrayO);
+	   //number of rows, columns or diagonals with two X's and no O
+	   int z = calcZ(arrayX, arrayO);
+	   // number of rows, columns or diagonals with one X and no O
+	   int y = calcY(arrayX, arrayO);
+	   return 3*o + x - (3*z + y);	   
+   }
+   
+   private int calcO(int[] arrayX, int[] arrayO){
+	 //number of rows, columns or diagonals with two O's and no X
+	   int o = 0;
+	   if((arrayO[0]==1)&&(arrayO[1]==1)&&(arrayX[2]==0)||
+		  (arrayO[0]==1)&&(arrayX[1]==0)&&(arrayO[2]==1)||
+		  (arrayX[0]==0)&&(arrayO[1]==1)&&(arrayO[2]==1))
+		   o++;
+	   if((arrayO[3]==1)&&(arrayO[4]==1)&&(arrayX[5]==0)||
+		  (arrayO[3]==1)&&(arrayX[4]==0)&&(arrayO[5]==1)||
+		  (arrayX[3]==0)&&(arrayO[4]==1)&&(arrayO[5]==1))
+		   o++;
+	   if((arrayO[6]==1)&&(arrayO[7]==1)&&(arrayX[8]==0)||
+		  (arrayO[6]==1)&&(arrayX[7]==0)&&(arrayO[8]==1)||
+		  (arrayX[6]==0)&&(arrayO[7]==1)&&(arrayO[8]==1))
+		   o++;
+	   if((arrayO[0]==1)&&(arrayO[3]==1)&&(arrayX[6]==0)||
+		  (arrayO[0]==1)&&(arrayX[3]==0)&&(arrayO[6]==1)||
+		  (arrayX[0]==0)&&(arrayO[3]==1)&&(arrayO[6]==1))
+		   o++;
+	   if((arrayO[1]==1)&&(arrayO[4]==1)&&(arrayX[7]==0)||
+		  (arrayO[1]==1)&&(arrayX[4]==0)&&(arrayO[7]==1)||
+		  (arrayX[1]==0)&&(arrayO[4]==1)&&(arrayO[7]==1))
+		   o++;
+	   if((arrayO[2]==1)&&(arrayO[5]==1)&&(arrayX[8]==0)||
+		  (arrayO[2]==1)&&(arrayX[5]==0)&&(arrayO[8]==1)||
+		  (arrayX[2]==0)&&(arrayO[5]==1)&&(arrayO[8]==1))
+		   o++;
+	   if((arrayO[0]==1)&&(arrayO[4]==1)&&(arrayX[8]==0)||
+		   (arrayO[0]==1)&&(arrayX[4]==0)&&(arrayO[8]==1)||
+		   (arrayX[0]==0)&&(arrayO[4]==1)&&(arrayO[8]==1))
+		    o++;
+	   if((arrayO[2]==1)&&(arrayO[4]==1)&&(arrayX[6]==0)||
+		  (arrayO[2]==1)&&(arrayX[4]==0)&&(arrayO[6]==1)||
+		  (arrayX[2]==0)&&(arrayO[4]==1)&&(arrayO[6]==1))
+		   o++;
+	   return o;
+   }
+   
+   private int calcX(int[] arrayX, int[] arrayO){
+	 //number of rows, columns or diagonals with one O and no X  
+	   int x = 0;
+	   if((arrayO[0]==1)&&(arrayX[1]==0)&&(arrayX[2]==0)||
+		  (arrayX[0]==0)&&(arrayO[1]==1)&&(arrayX[2]==0)||
+		  (arrayX[0]==0)&&(arrayX[1]==0)&&(arrayO[2]==1))
+		   x++;
+	   if((arrayO[3]==1)&&(arrayX[4]==0)&&(arrayX[5]==0)||
+		  (arrayX[3]==0)&&(arrayX[4]==0)&&(arrayO[5]==1)||
+		  (arrayX[3]==0)&&(arrayO[4]==1)&&(arrayX[5]==0))
+		   x++;
+	   if((arrayO[6]==1)&&(arrayX[7]==0)&&(arrayX[8]==0)||
+		  (arrayX[6]==0)&&(arrayX[7]==0)&&(arrayO[8]==1)||
+		  (arrayX[6]==0)&&(arrayO[7]==1)&&(arrayX[8]==0))
+		   x++;
+	   if((arrayO[0]==1)&&(arrayX[3]==0)&&(arrayX[6]==0)||
+		  (arrayX[0]==0)&&(arrayX[3]==0)&&(arrayO[6]==1)||
+		  (arrayX[0]==0)&&(arrayO[3]==1)&&(arrayX[6]==0))
+		   x++;
+	   if((arrayO[1]==1)&&(arrayX[4]==0)&&(arrayX[7]==0)||
+		  (arrayX[1]==0)&&(arrayX[4]==0)&&(arrayO[7]==1)||
+		  (arrayX[1]==0)&&(arrayO[4]==1)&&(arrayX[7]==0))
+		   x++;
+	   if((arrayO[2]==1)&&(arrayX[5]==0)&&(arrayX[8]==0)||
+		  (arrayX[2]==0)&&(arrayX[5]==0)&&(arrayO[8]==1)||
+		  (arrayX[2]==0)&&(arrayO[5]==1)&&(arrayX[8]==0))
+		   x++;
+	   if((arrayO[0]==1)&&(arrayX[4]==0)&&(arrayX[8]==0)||
+		   (arrayX[0]==0)&&(arrayX[4]==0)&&(arrayO[8]==1)||
+		   (arrayX[0]==0)&&(arrayO[4]==1)&&(arrayX[8]==0))
+		    x++;
+	   if((arrayO[2]==1)&&(arrayX[4]==0)&&(arrayX[6]==0)||
+		  (arrayX[2]==0)&&(arrayX[4]==0)&&(arrayO[6]==1)||
+		  (arrayX[2]==0)&&(arrayO[4]==1)&&(arrayX[6]==0))
+		   x++;
+	   return x;
+   }
+
+   private int calcZ(int[] arrayX, int[] arrayO){
+	 //number of rows, columns or diagonals with two X's and no O
+	   return calcO(arrayO, arrayX);
+   }
+
+   private int calcY(int[] arrayX, int[] arrayO){
+	// number of rows, columns or diagonals with one X and no O
+	   return calcX(arrayO, arrayX);
+   }
     
 	
     public void mouseClicked(MouseEvent e) {
@@ -156,8 +275,9 @@ public class TicTacToeApplet extends JApplet implements MouseListener
         if ((currentButton.getText() == "")&&(!checkForWinner())){
                 //display player X move in applet
         		currentButton.setText("X");
+        		getIndex(currentButton);
         		//communicate player X move (integer) to listeners
-                //notifyListeners(this, currentButton.getText(), "", "X");
+                notifyListeners(this, currentButton.getText(), "", Character.toString(currentButton.getName().charAt(6)));
                 //if the current move is not winning and there still are empty cells, let the computer play its turn
                 //checkForWinner() must be evaluated, because the method highlights the winning combination, use & operator 
                 if ((!lastEmptyCell())&(!checkForWinner())){
@@ -172,7 +292,7 @@ public class TicTacToeApplet extends JApplet implements MouseListener
                 	//display computer move in applet
                 	arrayOfButtons[computerMove].setText("O");
                 	//communicate computer move (integer) to listeners
-                	notifyListeners(this, arrayOfButtons[computerMove].getText(), null, String.valueOf(computerMove));
+                	notifyListeners(this, arrayOfButtons[computerMove].getText(), "", String.valueOf(computerMove));
                 }
                 	checkForWinner();            
         }
@@ -251,15 +371,3 @@ public class TicTacToeApplet extends JApplet implements MouseListener
 		  }
 }
 
-class MyObserver implements PropertyChangeListener {
-    
-    public MyObserver(TicTacToeApplet model) {
-        model.addChangeListener(this);
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent event) {
-    	//new value = position of move (integer)
-       System.out.println("Changed property: " + event.getPropertyName() + " | [new -> " + event.getNewValue() +"]");
-    }
-} 
