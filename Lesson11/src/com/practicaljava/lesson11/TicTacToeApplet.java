@@ -270,7 +270,7 @@ public class TicTacToeApplet extends JApplet implements MouseListener
 	
     public void mouseClicked(MouseEvent e) {
     	setPlayerName(PLAYERX);
-        javax.swing.JButton currentButton = (JButton)e.getComponent();
+        JButton currentButton = (JButton)e.getComponent();
         //if the user clicks an empty cell and the computer hasn't already won, mark that cell with X
         if ((currentButton.getText() == "")&&(!checkForWinner())){
                 //display player X move in applet
@@ -364,7 +364,7 @@ public class TicTacToeApplet extends JApplet implements MouseListener
 	  protected void addChangeListener(PropertyChangeListener newListener) {
 		    listener.add(newListener);
 		  }
-	  protected void notifyListeners(Object object, String property, String oldValue, String newValue) {
+	  private void notifyListeners(Object object, String property, String oldValue, String newValue) {
 		    for (PropertyChangeListener name : listener) {
 		      name.propertyChange(new PropertyChangeEvent(this, property, oldValue, newValue));
 		    }
