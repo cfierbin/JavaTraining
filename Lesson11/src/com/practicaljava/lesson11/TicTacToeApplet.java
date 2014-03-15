@@ -18,7 +18,9 @@ import java.util.List;
 
 public class TicTacToeApplet extends JApplet implements MouseListener
 {
-    private static final String PLAYERX = "Player X";
+    private MyObserver observer; //advises computer moves based on minimax algorithm
+	
+	private static final String PLAYERX = "Player X";
     private static final String PLAYERO = "Player O";
     
     //GUI settings
@@ -53,6 +55,7 @@ public class TicTacToeApplet extends JApplet implements MouseListener
         initComponents();
         //create observer to be notified about computer moves
         MyObserver observer = new MyObserver(this);
+        this.observer = observer;
     }
 
     //initialize components
@@ -175,7 +178,9 @@ public class TicTacToeApplet extends JApplet implements MouseListener
                 	//if the randomly generated square is occupied, call the method again
                 	//make moves smarter by using minimax strategy
 
-                	int computerMove = getComputerMove();
+                	//int computerMove = getComputerMove();
+                	
+                	int computerMove = observer.minimaxComputerMove();
                 	
                 	//display computer move in applet
                 	arrayOfButtons[computerMove].setText("O");

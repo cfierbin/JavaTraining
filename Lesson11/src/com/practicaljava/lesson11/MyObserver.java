@@ -4,10 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 class MyObserver implements PropertyChangeListener {
-	
-	//private int newValue;
-	//private String newValueS;
-	
+		
 	//positions currently occupied by X
 	private int[] posX = {0,0,0,0,0,0,0,0,0};
 	//positions currently occupied by O
@@ -44,23 +41,56 @@ class MyObserver implements PropertyChangeListener {
     }
     
     
-    private int minimaxComputerMove(){
+    int minimaxComputerMove(){
  	   //http://www.youtube.com/watch?v=3sbGRBjsf0o
+       //o = number of rows, columns or diagonals with two O's and no X
+       //x = number of rows, columns or diagonals with one O and no X
+       //z = number of rows, columns or diagonals with two X's and no O
+       //y = number of rows, columns or diagonals with one X and no O
+       //evaluationFunction = 3*o + x - (3*z + y)
+    	
  	   int computerMove = 0;
- 	 //o = number of rows, columns or diagonals with two O's and no X
- 	 //x = number of rows, columns or diagonals with one O and no X
- 	 //z = number of rows, columns or diagonals with two X's and no O
- 	 //y = number of rows, columns or diagonals with one X and no O
- 	 //evaluationFunction = 3*o + x - (3*z + y)
+ 	   int[] simulatedPosO = new int[9];
  	   
- 	   //calculate evaluation function for each possible move of O
+ 	   //initialize array of evaluation function values with 
+ 	   //something that can never be the result of an evaluation function
+ 	   int[] evaluationFunction = {-100,-100,-100,-100,-100,-100,-100,-100};
+ 	 	   
+ 	   //calculate the evaluation function for each possible move of O
+ 	   for (int i=0; i<9; i++){
+ 		//if position is occupied move on   
+ 		   if ((posX[i] == 1) || (posO[i]==1)){
+ 			   continue;
+ 		   }
+ 		//copy posO array into a temporary array used for simulating a move
+ 	   for (int j=0; j<9; j++){
+ 		   simulatedPosO[j] = posO[j];
+ 	   }
+ 	   //pretend O moves to this position and apply evaluationFunction
+ 	   simulatedPosO[i] = 1;
+ 	   evaluationFunction[i] = minimaxEvaluationFunction(posX, simulatedPosO);
+ 	   }
+ 	   	   
  	   //pick move with maximum value of the evaluation function
  	   
+ 	  computerMove = indexOfMaxValueFrom(evaluationFunction);
  	   
- 	   return computerMove;
+ 	  return computerMove;
     }
     
-    private int minimaxEvaluationFunction(int[] arrayX, int[] arrayO){
+    private int indexOfMaxValueFrom(int[] evaluationFunction) {
+    	int index = 0;
+    	int max = evaluationFunction[0];
+		for(int i=0; i<9; i++){
+			if (evaluationFunction[i] > max) {
+				max = evaluationFunction[i];
+				index = i;	
+			}
+		}
+		return index;
+	}
+
+	private int minimaxEvaluationFunction(int[] arrayX, int[] arrayO){
  	   //number of rows, columns or diagonals with two O's and no X
  	   int o = calcO(arrayX, arrayO);
  	   //number of rows, columns or diagonals with one O and no X
