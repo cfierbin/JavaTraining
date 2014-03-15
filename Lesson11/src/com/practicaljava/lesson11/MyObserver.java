@@ -13,6 +13,13 @@ class MyObserver implements PropertyChangeListener {
     public MyObserver(TicTacToeApplet model) {
         model.addChangeListener(this);
     }
+    
+    void reset(){
+    	for (int i=0;i<9;i++){
+    		posX[i]=0;
+    		posO[i]=0;
+    	}
+    }
 
     @Override
     public void propertyChange(PropertyChangeEvent event) {
@@ -54,7 +61,7 @@ class MyObserver implements PropertyChangeListener {
  	   
  	   //initialize array of evaluation function values with 
  	   //something that can never be the result of an evaluation function
- 	   int[] evaluationFunction = {-100,-100,-100,-100,-100,-100,-100,-100};
+ 	   int[] evaluationFunction = {-100,-100,-100,-100,-100,-100,-100,-100,-100};
  	 	   
  	   //calculate the evaluation function for each possible move of O
  	   for (int i=0; i<9; i++){

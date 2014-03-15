@@ -115,6 +115,7 @@ public class TicTacToeApplet extends JApplet implements MouseListener
         }
         setPlayerName(PLAYERX);
         playerNumber.setText("");
+        observer.reset();
     }
     
     private int getIndex(JButton button){
