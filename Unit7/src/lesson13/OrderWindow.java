@@ -31,6 +31,7 @@ public class OrderWindow extends JFrame implements ActionListener{
 	private String[] bikeModels = {"Street 1",  "Mini", "Street 2", "Practical", "Classical"};
 	private ImageIcon[] images;
 	private JLabel bikeImage;
+	private JLabel txtResult;
 	
 	/**
 	 * constructor creates panel and components, adds components to the panel
@@ -49,17 +50,22 @@ public class OrderWindow extends JFrame implements ActionListener{
 		
         images = new ImageIcon[bikeModels.length];
         for (int i = 0; i < bikeModels.length; i++) {
-            images[i] = new ImageIcon("D:\\JavaTraining\\Unit7\\Images\\bike" + i + ".jpg");
+  //          images[i] = new ImageIcon("D:\\JavaTraining\\Unit7\\Images\\bike" + i + ".jpg");
+            images[i] = new ImageIcon("./Images/bike" + i + ".jpg");
         }
 		
 		bikeModelsCombo.addActionListener(this);
-		quantity = new JTextField("                     ");
+		quantity = new JTextField("111");
 		placeOrder = new JButton("Place Order");
+		placeOrder.addActionListener(this);
 		bikeModelsLabel = new JLabel("Bike model: ");
 		quantityLabel = new JLabel("Quantity: ");
 		bikeImage = new JLabel();
 		
-		ImageIcon icon1 = new ImageIcon("D:\\JavaTraining\\Unit7\\Images\\bike0.jpg"); 
+		txtResult = new JLabel("Choose model and quantity.");
+		
+	//	ImageIcon icon1 = new ImageIcon("D:\\JavaTraining\\Unit7\\Images\\bike0.jpg"); 
+		ImageIcon icon1 = new ImageIcon("./Images/bike0.jpg");
 		bikeImage.setIcon(icon1);
 
 		panel1.add(bikeModelsLabel);
@@ -69,16 +75,36 @@ public class OrderWindow extends JFrame implements ActionListener{
 		container.add(panel1);
 		container.add(panel2);
 		container.add(bikeImage);
+		container.add(txtResult);
 		container.add(placeOrder);
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JComboBox cb = (JComboBox)e.getSource();
-        String bikeModel = (String)cb.getSelectedItem();
-        int index = cb.getSelectedIndex();
-        this.bikeModel = bikeModel;
-		bikeImage.setIcon(images[index]);
+		if(e.getSource() instanceof JComboBox){
+			JComboBox cb = (JComboBox)e.getSource();
+			String bikeModel = (String)cb.getSelectedItem();
+			int index = cb.getSelectedIndex();
+			this.bikeModel = bikeModel;
+			bikeImage.setIcon(images[index]);
+		}
+		else {
+			//the user clicked on the "Validate Order" button
+			try{
+				BikeOrder.validateOrder(bikeModel, Integer.parseInt(quantity.getText()));
+				txtResult.setForeground(Color.BLACK);
+				txtResult.setText("The order is valid.");
+			}
+			catch(TooManyBikesException exception){
+				txtResult.setForeground(Color.RED);
+				txtResult.setText(exception.getMessage());
+			}
+			catch(NumberFormatException exception){
+				txtResult.setForeground(Color.RED);
+				txtResult.setText("Please input desired quantity");
+			}
+	}
 	}
 
 }
