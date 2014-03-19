@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 public class TestStockPricesObserver {
 	
-	public static enum StockSymbol {AAPL, ORCL, IBM, AMZN, FB, MSFT, MSI}
+	private static enum StockSymbol {AAPL, ORCL, IBM, AMZN, FB, MSFT, MSI}
 	
 	private static StockSymbol symbol;
 	private static int price;
@@ -59,7 +59,7 @@ public class TestStockPricesObserver {
 				
         //generate stock symbols and prices
 		int delay = 0;
-		int period = randomInstance.nextInt(1000);
+		int period = randomInstance.nextInt(10000);
 		
 		timer.schedule(new TimerTask() {
 

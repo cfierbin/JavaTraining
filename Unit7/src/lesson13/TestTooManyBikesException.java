@@ -12,7 +12,7 @@ public class TestTooManyBikesException {
 		// create an instance of OrderWindow		
 		OrderWindow myOrder = new OrderWindow();
 		myOrder.setTitle("Pegas Bicycles");
-		myOrder.setSize(new Dimension(350,310));
+		myOrder.setSize(new Dimension(350,320));
 		myOrder.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		myOrder.setResizable(false);
 //		myOrder.pack();

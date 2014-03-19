@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class OrderWindow extends JFrame implements ActionListener{
 	
@@ -26,7 +27,7 @@ public class OrderWindow extends JFrame implements ActionListener{
 	
 	private JPanel container, panel1, panel2;
 	
-	private String bikeModel;
+	private String bikeModel = "Street 1";
 	
 	private String[] bikeModels = {"Street 1",  "Mini", "Street 2", "Practical", "Classical"};
 	private ImageIcon[] images;
@@ -55,14 +56,18 @@ public class OrderWindow extends JFrame implements ActionListener{
         }
 		
 		bikeModelsCombo.addActionListener(this);
-		quantity = new JTextField("111");
+		quantity = new JTextField("1");
+		quantity.setPreferredSize(new Dimension(100,20));
+		quantity.setHorizontalAlignment(JTextField.RIGHT);
 		placeOrder = new JButton("Place Order");
 		placeOrder.addActionListener(this);
 		bikeModelsLabel = new JLabel("Bike model: ");
 		quantityLabel = new JLabel("Quantity: ");
 		bikeImage = new JLabel();
 		
-		txtResult = new JLabel("Choose model and quantity.");
+		txtResult = new JLabel("<html>Choose model and quantity. "
+				+ "<br> Can ship at most 100 \"Mini\"s <br> "
+				+ "or at most 90 pieces <br> of any other model.</html>");
 		
 	//	ImageIcon icon1 = new ImageIcon("D:\\JavaTraining\\Unit7\\Images\\bike0.jpg"); 
 		ImageIcon icon1 = new ImageIcon("./Images/bike0.jpg");
@@ -93,18 +98,20 @@ public class OrderWindow extends JFrame implements ActionListener{
 			//the user clicked on the "Validate Order" button
 			try{
 				BikeOrder.validateOrder(bikeModel, Integer.parseInt(quantity.getText()));
-				txtResult.setForeground(Color.BLACK);
-				txtResult.setText("The order is valid.");
+				displayMessage(txtResult,"The order is valid.",Color.BLACK);
 			}
 			catch(TooManyBikesException exception){
-				txtResult.setForeground(Color.RED);
-				txtResult.setText(exception.getMessage());
+				displayMessage(txtResult,exception.getMessage(),Color.RED);
 			}
 			catch(NumberFormatException exception){
-				txtResult.setForeground(Color.RED);
-				txtResult.setText("Please input desired quantity");
+				displayMessage(txtResult,"Please input desired quantity",Color.RED);
 			}
 	}
+	}
+
+	private void displayMessage(JLabel label, String message, Color color) {
+		label.setForeground(color);
+		label.setText(message);
 	}
 
 }
