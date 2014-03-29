@@ -47,7 +47,7 @@ public class MyCustomizableGUI extends Application{
                 secondStage.setY(100);
                 secondStage.setTitle("Preferences");
             	Group rootNode = new Group();  
-                Scene secondScene = new Scene(rootNode,200,300);
+                PreferencesScene secondScene = new PreferencesScene(rootNode,230,170);
                 secondStage.setScene(secondScene); 
                 secondStage.show();
             }
