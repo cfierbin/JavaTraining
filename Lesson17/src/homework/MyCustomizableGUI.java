@@ -1,6 +1,8 @@
 package homework;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -36,6 +38,20 @@ public class MyCustomizableGUI extends Application{
 		Button userPreferencesButton = new Button("User Preferences");
 		userPreferencesButton.setLayoutX(150);
 		userPreferencesButton.setLayoutY(150);
+		
+		//open a new window when the user presses the button
+		userPreferencesButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                Stage secondStage = new Stage();
+                secondStage.setX(900);
+                secondStage.setY(100);
+                secondStage.setTitle("Preferences");
+            	Group rootNode = new Group();  
+                Scene secondScene = new Scene(rootNode,200,300);
+                secondStage.setScene(secondScene); 
+                secondStage.show();
+            }
+		});
 		
 		rootNode.getChildren().add(text);
 		rootNode.getChildren().add(userPreferencesButton);
