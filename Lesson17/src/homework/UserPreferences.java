@@ -6,7 +6,7 @@ public class UserPreferences implements Serializable {
 	
 	private String color;
 	private String fontName;
-	private byte fontSize;
+	private int fontSize;
 	
 	public String getColor() {
 		return color;
@@ -20,11 +20,11 @@ public class UserPreferences implements Serializable {
 	public void setFontName(String fontName) {
 		this.fontName = fontName;
 	}
-	public byte getFontSize() {
+	public int getFontSize() {
 		return fontSize;
 	}
-	public void setFontSize(byte fontSize) {
-		this.fontSize = fontSize;
+	public void setFontSize(Integer integer) {
+		this.fontSize = integer;
 	}
 
 }

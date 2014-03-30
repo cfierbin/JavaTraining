@@ -18,6 +18,8 @@ public class MyCustomizableGUI extends Application{
 	private int fontSize = 40;
 	private String fontName = "SansSerif";
 	private Color colorName = Color.DARKGOLDENROD;
+	
+	private Text text;
 
 	
 	public static void main(String[] args){
@@ -31,7 +33,7 @@ public class MyCustomizableGUI extends Application{
 		Group rootNode = new Group();
 		Scene scene = new Scene(rootNode, 400, 250, Color.WHITE);
 		
-		Text text = new Text(textOriginX,textOriginY, "JavaFX is awesome!");
+		text = new Text(textOriginX,textOriginY, "JavaFX is awesome!");
 		text.setFont(Font.font(fontName,fontSize));
 		text.setFill(colorName);
 		
@@ -40,15 +42,15 @@ public class MyCustomizableGUI extends Application{
 		userPreferencesButton.setLayoutY(150);
 		
 		//open a new window when the user presses the button
+		final Stage secondStage = new Stage();
+        secondStage.setX(900);
+        secondStage.setY(100);
+        secondStage.setTitle("Preferences");
+    	Group secondRootNode = new Group();  
+        PreferencesScene secondScene = new PreferencesScene(secondRootNode,280,170,this);
+        secondStage.setScene(secondScene); 
 		userPreferencesButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                Stage secondStage = new Stage();
-                secondStage.setX(900);
-                secondStage.setY(100);
-                secondStage.setTitle("Preferences");
-            	Group rootNode = new Group();  
-                PreferencesScene secondScene = new PreferencesScene(rootNode,280,170);
-                secondStage.setScene(secondScene); 
+            public void handle(ActionEvent event) {             
                 secondStage.show();
             }
 		});
@@ -58,6 +60,14 @@ public class MyCustomizableGUI extends Application{
 		
 		primaryStage.setScene(scene);
 		primaryStage.show();
+	}
+
+	public Text getText() {
+		return text;
+	}
+
+	public void setText(Text text) {
+		this.text = text;
 	}
 
 }
