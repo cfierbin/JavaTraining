@@ -52,6 +52,7 @@ public class PreferencesScene extends Scene {
 	private final ComboBox fontSizeComboBox = new ComboBox(fontSizeOptions);
     private final Button saveButton = new Button ("Save");
     private final Button cancelButton = new Button ("Cancel");
+    private final Label errorMessage = new Label("");
     
     //layout manager
     private GridPane grid = new GridPane();
@@ -60,7 +61,7 @@ public class PreferencesScene extends Scene {
     public PreferencesScene(Group root, int x, int y, MyCustomizableGUI parent) {
 		//call scene constructor to define root node
     	super(root, x, y);
-    	
+    	//get reference to primary stage (the one that displays the text)
     	textDisplayWindow = parent;
     		
 		grid.setVgap(10);
@@ -73,10 +74,15 @@ public class PreferencesScene extends Scene {
         colorComboBox.setEditable(true);
         colorComboBox.valueProperty().addListener(new ChangeListener<String>() {
             @Override 
-            public void changed(ObservableValue ov, String t, String t1) {  
+            public void changed(ObservableValue ov, String t, String t1) { 
+            	errorMessage.setText("");//delete previous error message
             	try{
             	textDisplayWindow.getText().setFill((Paint)(Class.forName("javafx.scene.paint.Color").getField(t1)).get(null));
-            	}catch(Exception e){}
+            	}catch(Exception e){
+            		//e.printStackTrace();
+            		errorMessage.setTextFill(Color.RED);
+            		errorMessage.setText("Unknown color.");
+            		}
             	userPreferences.setColor(t1);                
             }    
         });
@@ -109,7 +115,8 @@ public class PreferencesScene extends Scene {
         grid.add(fontSizeComboBox, 1, 2);
         grid.add(cancelButton, 0, 5);
         saveButton.setOnAction(new PreferencesSceneEventHandler(this));
-        grid.add(saveButton, 1, 5);        
+        grid.add(saveButton, 1, 5);
+        grid.add(errorMessage, 0, 6);
         root.getChildren().add(grid);
 	}
 
