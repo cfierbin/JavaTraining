@@ -1,5 +1,9 @@
 package homework;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,6 +11,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -33,10 +38,34 @@ public class MyCustomizableGUI extends Application{
 		Group rootNode = new Group();
 		Scene scene = new Scene(rootNode, 400, 250, Color.WHITE);
 		
+		//deserialize preferences.ser and apply the properties saved there
+		UserPreferences userPreferences = new UserPreferences();
+		FileInputStream fIn = null;	
+		ObjectInputStream oIn = null;
+		try{
+			fIn = new FileInputStream("preferences.ser");
+			oIn = new ObjectInputStream(fIn);
+		
+			userPreferences = (UserPreferences)oIn.readObject();
+		} 
+		catch (ClassNotFoundException cnf){
+			cnf.printStackTrace();
+		} 
+		catch (IOException e){e.printStackTrace();}
+	
 		text = new Text(textOriginX,textOriginY, "JavaFX is awesome!");
+		/*
 		text.setFont(Font.font(fontName,fontSize));
 		text.setFill(colorName);
+		*/
 		
+		text.setFont(Font.font(userPreferences.getFontName(),userPreferences.getFontSize()));
+		try{
+			text.setFill((Paint)(Class.forName("javafx.scene.paint.Color").getField(userPreferences.getColor())).get(null));
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
 		Button userPreferencesButton = new Button("User Preferences");
 		userPreferencesButton.setLayoutX(150);
 		userPreferencesButton.setLayoutY(150);
