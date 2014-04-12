@@ -44,8 +44,7 @@ public class MyCustomizableGUI extends Application{
 		ObjectInputStream oIn = null;
 		try{
 			fIn = new FileInputStream("preferences.ser");
-			oIn = new ObjectInputStream(fIn);
-		
+			oIn = new ObjectInputStream(fIn);	
 			userPreferences = (UserPreferences)oIn.readObject();
 		} 
 		catch (ClassNotFoundException cnf){
