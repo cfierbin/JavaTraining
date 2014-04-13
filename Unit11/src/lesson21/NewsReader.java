@@ -1,7 +1,9 @@
 package lesson21;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStreamReader;
 
 import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
@@ -11,9 +13,9 @@ public class NewsReader extends SwingWorker<String, Integer> {
 	//process takes an argument of type Integer (number of bytes in the file)
 	
 	JTextArea newsArea;
-	FileInputStream file;
+	File file;
 	
-	NewsReader(JTextArea textArea, FileInputStream file) {
+	NewsReader(JTextArea textArea, File file) {
         //initialize
 		newsArea = textArea;
 		this.file = file;
@@ -21,15 +23,23 @@ public class NewsReader extends SwingWorker<String, Integer> {
 
 	@Override
 	protected String doInBackground() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		String theWholeFile = null;
+		String txt;
+		BufferedReader buff = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+		while((txt=buff.readLine()) != null){
+			System.out.println(txt);
+			theWholeFile = theWholeFile + txt;
+		}
+		buff.close();
+		return theWholeFile;
 	}
 	
 	@Override
     protected void done() {
         try {
             newsArea.setText(get());
-        } catch (Exception ignore) {
+        } catch (Exception e) {
+        	System.out.println("Exception in newsArea.setText()");
         }
     }
 
