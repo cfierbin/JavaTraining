@@ -1,7 +1,7 @@
 package lesson21;
 
-import java.net.URL;
-import java.util.List;
+import java.io.File;
+import java.io.FileInputStream;
 
 import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
@@ -11,12 +11,12 @@ public class NewsReader extends SwingWorker<String, Integer> {
 	//process takes an argument of type Integer (number of bytes in the file)
 	
 	JTextArea newsArea;
-	URL url;
+	FileInputStream file;
 	
-	NewsReader(JTextArea textArea, URL url) {
+	NewsReader(JTextArea textArea, FileInputStream file) {
         //initialize
 		newsArea = textArea;
-		this.url = url;
+		this.file = file;
     }
 
 	@Override
@@ -32,8 +32,5 @@ public class NewsReader extends SwingWorker<String, Integer> {
         } catch (Exception ignore) {
         }
     }
-
-	
-	
 
 }
