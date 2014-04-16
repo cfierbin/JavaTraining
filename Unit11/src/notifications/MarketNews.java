@@ -1,8 +1,23 @@
 package notifications;
 
-class MarketNews implements Updatable{
+class MarketNews extends Thread implements Updatable{
 	
-	String marketNews = null;
+	private String marketNews = null;
+	private	volatile boolean stopMe	= false;	
+	
+	public void	stopMe() {	
+		stopMe = true;	
+	}	
+
+	public void run(){
+	
+	do{
+	
+		getNews();
+	
+	} while(!stopMe);
+	
+	}
 	
 	synchronized void getNews(){
 		
@@ -14,7 +29,7 @@ class MarketNews implements Updatable{
 		}
 		
 		System.out.println(marketNews);
-		
+				
 	}	
 	
 	public void setData (String news){

@@ -2,7 +2,13 @@ package notifications;
 
 class ClassB extends Thread {
 	
-	Updatable parent = null;
+	private Updatable parent = null;
+	
+	private	volatile boolean stopMe	= false;	
+	
+	public void	stopMe() {	
+		stopMe = true;	
+	}
 	
 	ClassB(Updatable caller, String threadName){
 		super(threadName);
@@ -25,7 +31,7 @@ class ClassB extends Thread {
 			parent.setData(Thread.currentThread().getName() + ": " + someData);
 			parent.notify();
 		}
-		} while (true);
+		} while (!stopMe);
 	}
 
 }
