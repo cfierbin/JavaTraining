@@ -13,7 +13,17 @@ public class Portfolio implements Runnable {
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:derby://localhost:1527/Lesson22");
+			
+			//conn = DriverManager.getConnection("jdbc:derby://localhost:1527/Lesson22");
+			
+			//connect using DataSource 
+			org.apache.derby.jdbc.ClientDataSource ds = new org.apache.derby.jdbc.ClientDataSource();
+			ds.setServerName("localhost");
+			ds.setDatabaseName("Lesson22");
+			ds.setDescription("Sample database for Lesson 22");
+			
+			conn = ds.getConnection();
+					
 			String sqlQuery = "SELECT * FROM PORTFOLIO";
 			stmt = conn.createStatement();
 			//Execute SQL and get the ResultSet object
