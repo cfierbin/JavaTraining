@@ -23,7 +23,7 @@ public class Portfolio implements Runnable {
 			ds.setDescription("Sample database for Lesson 22");
 			
 			conn = ds.getConnection();
-					
+			
 			String sqlQuery = "SELECT * FROM PORTFOLIO";
 			stmt = conn.createStatement();
 			//Execute SQL and get the ResultSet object

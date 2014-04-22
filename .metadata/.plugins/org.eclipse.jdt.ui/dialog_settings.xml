@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="C:\Program Files (x86)\Java\jdk1.7.0_51\jre\lib" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="D:\SQLDeveloper\sqldeveloper\jdbc\lib" key="org.eclipse.jdt.ui.lastextjar"/>
 	<section name="OptionalMessageDialog.hide.">
 		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
 	</section>
