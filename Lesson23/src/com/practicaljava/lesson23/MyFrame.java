@@ -58,7 +58,7 @@ class MyTableModel extends AbstractTableModel {
 /*
 		String[] orderColNames = { "Order ID",   "Symbol", 
                 "Quantity", "Price"};
- */
+*/ 
 
 	   MyTableModel(){
 			myData = OrderDAO.getOrder();
@@ -98,7 +98,7 @@ class MyTableModel extends AbstractTableModel {
 	    
 	    public String getColumnName(int col){
 //	    	return orderColNames[col];
-	    	return OrderDAO.getColumnName(col);
+	    	return OrderDAO.getColumnName(col + 1);
 	    }
 
 	    
