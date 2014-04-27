@@ -7,7 +7,7 @@ import java.sql.Statement;
 import oracle.jdbc.pool.OracleDataSource;
 
 
-public class OracleHRSchemaDAO implements Runnable {
+public class OracleHRSchemaTest implements Runnable {
 
 	@Override
 	public void run() {
