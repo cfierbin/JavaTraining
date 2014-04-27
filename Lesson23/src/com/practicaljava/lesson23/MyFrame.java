@@ -39,7 +39,8 @@ public class MyFrame  extends JFrame implements TableModelListener{
  }
 
  public static void main(String args[]){
-  OrderDAO.createTable(); 
+	 
+	 OracleDataDefinitionAndManipulation.createTable(); 
 	 
   MyFrame myFrame = new MyFrame( "My Test Window" );
   myFrame.pack();
