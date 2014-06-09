@@ -17,6 +17,7 @@ import com.practicaljava.lesson31.MessageSender;
 public class StockServerBean {
 	
 	private String price=null;
+	private MessageSender mySender;
 	private ArrayList<String> nasdaqSymbols = new ArrayList<String>();
 	private Random numericGenerator;
 
@@ -24,6 +25,10 @@ public class StockServerBean {
      * Default constructor. 
      */
     public StockServerBean() {
+    	
+    	//create message sender
+    	mySender=new MessageSender();
+    	
         // Define some hard-coded NASDAQ symbols
     	nasdaqSymbols.add("AAPL");
     	nasdaqSymbols.add("ORCL");
@@ -45,7 +50,7 @@ public class StockServerBean {
     	    //String symbol = nasdaqSymbols.get(numericGenerator.nextInt(11));
     		price = (new Double(Math.random()*100)).toString();
     	    //send a text message with the price to the queue MyJMSTestQueue
-    		MessageSender mySender=new MessageSender();
+    		//MessageSender mySender=new MessageSender();
     		mySender.sendMessage(price);
     }
     
