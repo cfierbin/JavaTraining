@@ -43,7 +43,7 @@ public class HelloWorldServlet extends HttpServlet {
        out.println("Now, it's time for dependency injection demo: " + myBean.sayHello());
        
 		}catch (Exception e ) {
-			e.getStackTrace();
+			e.printStackTrace();
 		}
 	}
 
