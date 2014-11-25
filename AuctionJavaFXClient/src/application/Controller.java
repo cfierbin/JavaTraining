@@ -1,5 +1,10 @@
 package application;
 
+import javax.jms.*;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 import emulator.BidEmulator;
 import emulator.BidListener;
 import javafx.event.ActionEvent;
@@ -14,9 +19,21 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Properties;
 import java.util.Timer;
 
-public class Controller implements BidListener{
+public class Controller implements MessageListener{
+	
+    // Default values for JMS
+    private static final String DEFAULT_CONNECTION_FACTORY = "jms/RemoteConnectionFactory";
+    private static final String DEFAULT_DESTINATION = "jms/queue/test";
+    private static final String DEFAULT_USERNAME = "quickstartUser";
+    private static final String DEFAULT_PASSWORD = "quickstartPwd1!";
+    private static final String INITIAL_CONTEXT_FACTORY = "org.jboss.naming.remote.client.InitialContextFactory";
+    private static final String PROVIDER_URL = "http-remoting://127.0.0.1:9080";
+    
+    private Context namingContext = null;
+    private JMSConsumer consumer = null;
 
     //Bid emulator
     private static BidEmulator bidEmulator;
@@ -29,12 +46,73 @@ public class Controller implements BidListener{
 
     @FXML
     private void handleStartSimulationButtonClicked(ActionEvent ae){
-
+    	
         //Initialize bid emulator
         bidEmulator = new BidEmulator();
-        
         //Register this class as a listener
-        bidEmulator.addListener(this);
+        //bidEmulator.addListener(this);
+    	
+    	// Create the JMS consumer
+
+            try {
+                String userName = System.getProperty("username", DEFAULT_USERNAME);
+                String password = System.getProperty("password", DEFAULT_PASSWORD);
+
+                // Set up the namingContext for the JNDI lookup
+                final Properties env = new Properties();
+                env.put(Context.INITIAL_CONTEXT_FACTORY, INITIAL_CONTEXT_FACTORY);
+                env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, PROVIDER_URL));
+                env.put(Context.SECURITY_PRINCIPAL, userName);
+                env.put(Context.SECURITY_CREDENTIALS, password);
+                namingContext = new InitialContext(env);
+
+                // Perform the JNDI lookups
+                String connectionFactoryString = System.getProperty("connection.factory", DEFAULT_CONNECTION_FACTORY);
+                ConnectionFactory connectionFactory = (ConnectionFactory) namingContext.lookup(connectionFactoryString);
+
+                String destinationString = System.getProperty("destination", DEFAULT_DESTINATION);
+                Destination destination = (Destination) namingContext.lookup(destinationString);
+
+                try (JMSContext context = connectionFactory.createContext(userName, password)) {
+
+                    // Create the JMS consumer
+                    consumer = context.createConsumer(destination);
+                    //consumer.setMessageListener(this);
+                    MessageListener myMessageListener = new MessageListener() {
+                        @Override
+                        public void onMessage(Message message) {
+
+                            try {
+                                String receivedBid = message.getBody(String.class);
+                                System.out.println(receivedBid);
+                            } catch (JMSException e) {
+                                System.out.println(e.getStackTrace());
+                            }
+                            finally {
+                                System.out.println("onMessage called!!!");
+                            }
+                        }
+                    };
+                    consumer.setMessageListener(myMessageListener);
+                    /*
+                    for (int i = 0; i < 10; i++) {
+                        String text = consumer.receiveBody(String.class, 5000);
+                        System.out.println("Received message with content " + text);
+                    }
+                    */
+                }
+
+            } catch (NamingException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                if (namingContext != null) {
+                    try {
+                        namingContext.close();
+                    } catch (NamingException e) {
+                System.out.println(e.getMessage());        
+                    }
+                }
+            }
         
         //Create list of bids
         currentBids = new ArrayList<Bid>();
@@ -48,13 +126,30 @@ public class Controller implements BidListener{
 
         simulatorConsole.setText("Simulation started");
     }
+	
 
-    @FXML
+	@FXML
     private void handleStopSimulationButtonClicked(ActionEvent ae){
     	bidEmulator.cancel();
         simulatorConsole.setText("Simulation stopped");
     }
+    
+	@Override
+	public void onMessage(Message message) {
+		
+			try {
+//				Bid receivedBid = message.getBody(Bid.class);
+				String receivedBid = message.getBody(String.class);
+				System.out.println(receivedBid);
+				System.out.println("onMessage called!!!");
+			} catch (JMSException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
+	}
+
+    /*
     @Override
     public void bidEvent(Bid bid) {
        System.out.println("Received a new bid!");
@@ -83,6 +178,7 @@ public class Controller implements BidListener{
         //ff the bid is greater or equal to the Product reserved price, send the bidder a winning email
         System.out.println();
     }
+    */
 
     private void loadUsersProductsAndBids(){
         //users
@@ -177,4 +273,6 @@ public class Controller implements BidListener{
         System.out.println();
 
     }
+
+
 }

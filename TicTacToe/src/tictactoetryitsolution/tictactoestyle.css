@@ -1,0 +1,10 @@
+@CHARSET "ISO-8859-1";
+
+#game-button {
+    -fx-background-color: grey;
+	-fx-font-family: "Times New Roman";
+    -fx-font-size: 60px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+

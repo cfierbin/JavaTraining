@@ -14,13 +14,15 @@ import java.util.TimerTask;
  */
 public class BidEmulator extends TimerTask {
 
-    private BidListener listener;
+//    private BidListener listener;
     private Random number = new Random();
     private static int uniqueBidId = 3;
 
+    /*
     public void addListener(BidListener listener){
         this.listener = listener;
     }
+    */
 
     @Override
     public void run() {
@@ -52,8 +54,8 @@ public class BidEmulator extends TimerTask {
             String seconds = time.substring(17,19);
         //when seconds equals randomly generated number, generate bid event
         if (Integer.valueOf(seconds) == s) {
-            System.out.println("Time: " + time);
-            listener.bidEvent(bid);
+           // System.out.println("Time: " + time);
+ //           listener.bidEvent(bid);
         }
 
     }

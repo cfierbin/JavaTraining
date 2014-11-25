@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane hgap="5.0" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" vgap="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TicTacToeController">
+        <columnConstraints>
+          <ColumnConstraints maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="100.0" />
+          <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="100.0" />
+          <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="100.0" />
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" />
+        </rowConstraints>
+         <children>
+            <Button id="game-button" fx:id="button1" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleButtonClicked" prefHeight="100.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button id="game-button" fx:id="button2" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleButtonClicked" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button id="game-button" fx:id="button3" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleButtonClicked" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button id="game-button" fx:id="button4" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleButtonClicked" prefHeight="100.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button id="game-button" fx:id="button5" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleButtonClicked" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button id="game-button" fx:id="button6" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleButtonClicked" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button id="game-button" fx:id="button7" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleButtonClicked" prefHeight="100.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button id="game-button" fx:id="button8" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleButtonClicked" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button id="game-button" fx:id="button9" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleButtonClicked" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button fx:id="playAgainButton" mnemonicParsing="false" onAction="#reset" text="Reset" textFill="#d02078" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="BASELINE" GridPane.vgrow="ALWAYS">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+            <Label fx:id="playerNumber" alignment="CENTER" contentDisplay="CENTER" textAlignment="CENTER" textFill="#0d7fa8" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="BASELINE">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+         </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</GridPane>
