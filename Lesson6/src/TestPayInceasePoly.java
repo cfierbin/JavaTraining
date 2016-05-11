@@ -10,7 +10,7 @@ public class TestPayInceasePoly {
 		workers[2] = new Employee("Steve");
 		
 			for (Person p: workers){
-			          ((Payable)p).increasePay(30);
+			          System.out.println(((Payable)p).increasePay(30)?"Done":"Failed");
 	 		}
 		}
 }
